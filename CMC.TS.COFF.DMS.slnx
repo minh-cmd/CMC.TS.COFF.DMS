@@ -1,1 +1,7 @@
-<Solution />
+<Solution>
+  <Project Path="CMC.TS.COFF.DMS.Api/CMC.TS.COFF.DMS.Api.csproj" />
+  <Project Path="CMC.TS.COFF.DMS.Biz.Model/CMC.TS.COFF.DMS.Biz.Model.csproj" />
+  <Project Path="CMC.TS.COFF.DMS.Biz/CMC.TS.COFF.DMS.Biz.csproj" />
+  <Project Path="CMC.TS.COFF.DMS.Data.Model/CMC.TS.COFF.DMS.Data.Model.csproj" />
+  <Project Path="CMC.TS.COFF.DMS.Data/CMC.TS.COFF.DMS.Data.csproj" />
+</Solution>

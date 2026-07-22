@@ -12,6 +12,7 @@ namespace CMC.TS.COFF.DMS.Api
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
@@ -19,6 +20,8 @@ namespace CMC.TS.COFF.DMS.Api
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.MapSwagger();
+                app.MapSwaggerUI();
             }
 
             app.UseHttpsRedirection();
