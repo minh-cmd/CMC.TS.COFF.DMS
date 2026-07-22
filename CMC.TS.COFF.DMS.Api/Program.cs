@@ -1,4 +1,7 @@
 
+using CMC.TS.COFF.DMS.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace CMC.TS.COFF.DMS.Api
 {
     public class Program
@@ -6,9 +9,10 @@ namespace CMC.TS.COFF.DMS.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             // Add services to the container.
-
+            builder.Services.AddDbContext<SQLServerDbContext>(options => options.UseSqlServer(connectionString));
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
