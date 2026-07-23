@@ -9,9 +9,9 @@ namespace CMC.TS.COFF.DMS.Data
 {
     public class SQLServerDbContext : DbContext
     {
-        DbSet<Documents> documents;
+        public DbSet<Documents> documents {  get; set; }
         public SQLServerDbContext(DbContextOptions<SQLServerDbContext> options) : base(options) 
-        { 
+        {
         
         }
 
