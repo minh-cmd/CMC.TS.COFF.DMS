@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CMC.TS.COFF.DMS.Biz.Model\CMC.TS.COFF.DMS.Biz.Model.csproj" />
+    <ProjectReference Include="..\CMC.TS.COFF.DMS.Data\CMC.TS.COFF.DMS.Data.csproj" />
+  </ItemGroup>
+
 </Project>
