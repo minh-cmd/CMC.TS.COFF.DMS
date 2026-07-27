@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <ProjectReference Include="..\CMC.TS.COFF.DMS.Biz.Model\CMC.TS.COFF.DMS.Biz.Model.csproj" />
+	  <ProjectReference Include="..\CMC.TS.COFF.DMS.Biz\CMC.TS.COFF.DMS.Biz.csproj" />
 	  <ProjectReference Include="..\CMC.TS.COFF.DMS.Data\CMC.TS.COFF.DMS.Data.csproj" />
 	  <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
