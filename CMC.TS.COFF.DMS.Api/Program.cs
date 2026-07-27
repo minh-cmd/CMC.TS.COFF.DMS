@@ -1,4 +1,8 @@
 
+using CMC.TS.COFF.DMS.Biz.IRepositories;
+using CMC.TS.COFF.DMS.Biz.IServices;
+using CMC.TS.COFF.DMS.Biz.Repositories;
+using CMC.TS.COFF.DMS.Biz.Services;
 using CMC.TS.COFF.DMS.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +21,9 @@ namespace CMC.TS.COFF.DMS.Api
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IDocumentsRepository, DocumentRepository>();
+            builder.Services.AddScoped<IDocumentsService, DocumentsService>();
 
             var app = builder.Build();
 
