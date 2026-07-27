@@ -6,7 +6,7 @@ namespace CMC.TS.COFF.DMS.Data.Model
 {
     public class Documents
     {
-        public Guid Id { get; set; } = Guid.Empty;
+        public Guid Id { get; init; } = Guid.NewGuid();
         public string Title { get; set; } = string.Empty;
         public string? Description { get; set; }
         public string ContentType { get; set; } = string.Empty;
@@ -17,9 +17,8 @@ namespace CMC.TS.COFF.DMS.Data.Model
 
         }
 
-        public Documents(string title, string description, string contenttype, string extension)
+        public Documents(string title, string? description, string contenttype, string extension)
         {
-            Id = Guid.NewGuid();
             Title = title;
             Description = description;
             ContentType = contenttype;
