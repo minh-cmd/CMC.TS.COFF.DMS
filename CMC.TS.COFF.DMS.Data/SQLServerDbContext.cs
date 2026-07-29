@@ -46,6 +46,33 @@ namespace CMC.TS.COFF.DMS.Data
                 entity.Property(d => d.Extension)
                       .IsRequired()
                       .HasMaxLength(10);
+
+                // File Storage Details
+                entity.Property(d => d.FileSize)
+                      .IsRequired(); // bigint in SQL Server
+
+                entity.Property(d => d.StoragePath)
+                      .IsRequired()
+                      .HasMaxLength(1000); // Prevents nvarchar(max) for better performance
+
+                // Relational Keys
+                entity.Property(d => d.CategoryId)
+                      .IsRequired(false); // Nullable FK column
+
+                // Audit & System Metadata
+                entity.Property(d => d.CreatedAt)
+                      .IsRequired()
+                      .HasDefaultValueSql("GETUTCDATE()"); // SQL Server automatically populates timestamp on INSERT
+
+                entity.Property(d => d.UpdatedAt)
+                      .IsRequired(false);
+
+                entity.Property(d => d.CreatedBy)
+                      .IsRequired(false);
+
+                entity.Property(d => d.IsDeleted)
+                      .IsRequired()
+                      .HasDefaultValue(false); // SQL Server defaults bit flag to 0
             });
         }
     }
