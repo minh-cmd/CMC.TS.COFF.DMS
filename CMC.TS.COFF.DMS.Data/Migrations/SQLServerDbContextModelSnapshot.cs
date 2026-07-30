@@ -73,7 +73,7 @@ namespace CMC.TS.COFF.DMS.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CategoryId")
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ContentType")
@@ -122,7 +122,18 @@ namespace CMC.TS.COFF.DMS.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Documents", (string)null);
+                });
+
+            modelBuilder.Entity("CMC.TS.COFF.DMS.Data.Model.Documents", b =>
+                {
+                    b.HasOne("CMC.TS.COFF.DMS.Data.Model.Categories", null)
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

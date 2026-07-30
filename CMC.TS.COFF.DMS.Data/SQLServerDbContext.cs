@@ -57,7 +57,11 @@ namespace CMC.TS.COFF.DMS.Data
 
                 // Relational Keys
                 entity.Property(d => d.CategoryId)
-                      .IsRequired(false); // Nullable FK column
+                      .IsRequired(); // Nullable FK column
+
+                entity.HasOne<Categories>()
+                    .WithMany()
+                    .HasForeignKey(d => d.CategoryId);
 
                 // Audit & System Metadata
                 entity.Property(d => d.CreatedAt)
