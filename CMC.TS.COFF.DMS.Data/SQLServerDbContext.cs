@@ -61,8 +61,44 @@ namespace CMC.TS.COFF.DMS.Data
 
                 // Audit & System Metadata
                 entity.Property(d => d.CreatedAt)
+                      .IsRequired();
+
+                entity.Property(d => d.UpdatedAt)
+                      .IsRequired(false);
+
+                entity.Property(d => d.CreatedBy)
+                      .IsRequired(false);
+
+                entity.Property(d => d.IsDeleted)
                       .IsRequired()
-                      .HasDefaultValueSql("GETUTCDATE()"); // SQL Server automatically populates timestamp on INSERT
+                      .HasDefaultValue(false); // SQL Server defaults bit flag to 0
+            });
+
+            modelBuilder.Entity<Categories>(entity =>
+            {
+                entity.ToTable("Categories");
+
+                entity.HasKey(d => d.Id);
+
+                // Title: Required with max length
+                entity.Property(d => d.Name)
+                      .IsRequired()
+                      .HasMaxLength(255);
+
+                entity.Property(d => d.Code)
+                      .IsRequired()
+                      .HasMaxLength(10);
+
+                entity.HasIndex(d=> d.Code)
+                        .IsUnique();
+
+                // Description: Optional
+                entity.Property(d => d.Description)
+                      .HasMaxLength(1000);
+
+                // Audit & System Metadata
+                entity.Property(d => d.CreatedAt)
+                      .IsRequired();
 
                 entity.Property(d => d.UpdatedAt)
                       .IsRequired(false);
