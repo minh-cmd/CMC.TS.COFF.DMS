@@ -10,6 +10,7 @@ namespace CMC.TS.COFF.DMS.Data
     public class SQLServerDbContext : DbContext
     {
         public DbSet<Documents> documents {  get; set; }
+        public DbSet<Categories> categories { get; set; }
         public SQLServerDbContext(DbContextOptions<SQLServerDbContext> options) : base(options) 
         {
         
