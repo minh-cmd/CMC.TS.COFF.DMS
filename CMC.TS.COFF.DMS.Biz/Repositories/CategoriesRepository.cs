@@ -34,5 +34,19 @@ namespace CMC.TS.COFF.DMS.Biz.Repositories
                 return false;
             }
         }
+
+        public async Task<List<Categories>?> GetAllCategories()
+        {
+            try
+            {
+                _logger.LogInformation($"start fetching categories operation");
+                return await _context.categories.Where(a => true).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Failed fetching categories {e}");
+                return null;
+            }
+        }
     }
 }

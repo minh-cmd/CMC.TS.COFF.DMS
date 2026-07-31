@@ -9,5 +9,7 @@ namespace CMC.TS.COFF.DMS.Biz.IRepositories
     public interface ICategoriesRepository
     {
         Task<bool> Create(NewCategory news);
+        Task<List<Categories>?> GetAllCategories();
+
     }
 }

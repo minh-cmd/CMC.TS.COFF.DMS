@@ -27,5 +27,14 @@ namespace CMC.TS.COFF.DMS.Api.Controllers
             }
             return BadRequest();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            List<Categories>? categories = await _categoriesRepository.GetAllCategories();
+            if (categories == null)
+                return StatusCode(500, "Unable to connect to the database. Please try again later.");
+            return Ok(categories);
+        }
     }
 }
