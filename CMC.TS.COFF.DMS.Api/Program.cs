@@ -21,6 +21,7 @@ namespace CMC.TS.COFF.DMS.Api
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddScoped<IDocumentsRepository, DocumentRepository>();
+            builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
 
             var app = builder.Build();
 
