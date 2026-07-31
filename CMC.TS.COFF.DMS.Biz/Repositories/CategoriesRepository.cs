@@ -48,5 +48,19 @@ namespace CMC.TS.COFF.DMS.Biz.Repositories
                 return null;
             }
         }
+
+        public async Task<Categories?> GetCategoryById(Guid id)
+        {
+            try
+            {
+                _logger.LogInformation($"start fetching category with id = {id}");
+                return await _context.categories.FirstOrDefaultAsync(a => a.Id == id);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Get Category by Id failed", e);
+                return null;
+            }
+        }
     }
 }

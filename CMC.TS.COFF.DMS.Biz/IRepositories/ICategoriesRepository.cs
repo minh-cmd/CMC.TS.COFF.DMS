@@ -10,6 +10,7 @@ namespace CMC.TS.COFF.DMS.Biz.IRepositories
     {
         Task<bool> Create(NewCategory news);
         Task<List<Categories>?> GetAllCategories();
+        Task<Categories?> GetCategoryById(Guid id);
 
     }
 }
