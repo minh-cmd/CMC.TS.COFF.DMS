@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CMC.TS.COFF.DMS.Biz.Model.Documents
+namespace CMC.TS.COFF.DMS.Data
 {
-    internal class View
+    internal class DomainDbContext
     {
     }
 }

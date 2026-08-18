@@ -22,6 +22,9 @@ namespace CMC.TS.COFF.DMS.Api
 
             builder.Services.AddScoped<IDocumentsRepository, DocumentRepository>();
             builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+            builder.Services.AddScoped<ITagsRepository, TagsRepository>();
+            builder.Services.AddScoped<IDocumentTagRepository, DocumentsTagRepository>();
+
 
             var app = builder.Build();
 

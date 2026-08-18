@@ -4,6 +4,7 @@ using CMC.TS.COFF.DMS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CMC.TS.COFF.DMS.Data.Migrations
 {
     [DbContext(typeof(SQLServerDbContext))]
-    partial class SQLServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260731101043_CreateDocumentTagEntity")]
+    partial class CreateDocumentTagEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

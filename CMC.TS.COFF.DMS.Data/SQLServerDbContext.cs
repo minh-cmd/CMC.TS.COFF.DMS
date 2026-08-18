@@ -11,6 +11,9 @@ namespace CMC.TS.COFF.DMS.Data
     {
         public DbSet<Documents> documents {  get; set; }
         public DbSet<Categories> categories { get; set; }
+        public DbSet<Tags> tags { get; set; }
+
+        public DbSet<DocumentTag> docsTags { get; set;}
         public SQLServerDbContext(DbContextOptions<SQLServerDbContext> options) : base(options) 
         {
         
@@ -114,6 +117,57 @@ namespace CMC.TS.COFF.DMS.Data
                 entity.Property(d => d.IsDeleted)
                       .IsRequired()
                       .HasDefaultValue(false); // SQL Server defaults bit flag to 0
+            });
+
+            modelBuilder.Entity<Tags>(entity =>
+            {
+                entity.ToTable("Tags");
+
+                entity.HasKey(t => t.Id);
+
+                entity.Property(t => t.Name)
+                    .IsRequired()
+                    .HasMaxLength(80); 
+
+                entity.Property(t => t.ColorHex)
+                    .IsRequired()
+                    .HasMaxLength(7);
+
+                entity.Property(t => t.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(t => t.UpdatedAt)
+                    .IsRequired(false);
+
+                entity.Property(t => t.CreatedBy)
+                    .IsRequired(false);
+
+                entity.Property(t => t.UpdatedBy)
+                    .IsRequired(false);
+
+                entity.Property(t => t.IsDeleted)
+                    .IsRequired()
+                    .HasDefaultValue(false);
+            });
+
+            modelBuilder.Entity<DocumentTag>(entity =>
+            {
+                entity.ToTable("DocumentTag");
+
+                entity.HasKey(dt => new { dt.DocumentId, dt.TagId });
+
+                entity.HasOne<Documents>()
+                    .WithMany()
+                    .HasForeignKey(dt => dt.DocumentId);
+                entity.HasOne<Tags>()
+                    .WithMany()
+                    .HasForeignKey(dt => dt.TagId);
+
+                entity.Property(dt => dt.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(dt => dt.CreatedBy)
+                    .IsRequired(false);
             });
         }
     }

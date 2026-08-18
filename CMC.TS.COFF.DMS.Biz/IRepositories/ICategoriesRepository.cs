@@ -11,6 +11,8 @@ namespace CMC.TS.COFF.DMS.Biz.IRepositories
         Task<bool> Create(NewCategory news);
         Task<List<Categories>?> GetAllCategories();
         Task<Categories?> GetCategoryById(Guid id);
+        Task<bool> Update(Guid id, NewCategory news);
 
+        Task<bool> Delete(Guid id);
     }
 }

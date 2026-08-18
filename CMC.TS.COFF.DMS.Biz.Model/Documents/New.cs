@@ -21,5 +21,7 @@ namespace CMC.TS.COFF.DMS.Biz.Model.Documents
         [Required]
         [StringLength(10)]
         public string Extension { get; set; } = string.Empty;
+
+        public List<Guid>? TagIds { get; set; }
     }
 }

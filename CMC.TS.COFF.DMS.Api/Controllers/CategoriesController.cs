@@ -17,7 +17,7 @@ namespace CMC.TS.COFF.DMS.Api.Controllers
             _categoriesRepository = categoriesRepository;
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> Create(NewCategory newCategory)
         {
             bool isSuccess = await _categoriesRepository.Create(newCategory);
@@ -28,7 +28,7 @@ namespace CMC.TS.COFF.DMS.Api.Controllers
             return BadRequest();
         }
 
-        [HttpGet("List")]
+        [HttpGet]
         public async Task<IActionResult> GetAllCategories()
         {
             List<Categories>? categories = await _categoriesRepository.GetAllCategories();
@@ -37,15 +37,37 @@ namespace CMC.TS.COFF.DMS.Api.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id::guid}")]
         public async Task<IActionResult> GetCategoryById(Guid id)
         {
             Categories? categories = await _categoriesRepository.GetCategoryById(id);
-            if(categories == null)
+            if (categories == null)
             {
                 return BadRequest();
             }
             return Ok(categories);
+        }
+
+        [HttpPut("{id::guid}")]
+        public async Task<IActionResult> Update(Guid id, NewCategory newCategory)
+        {
+            bool isSuccess = await _categoriesRepository.Update(id, newCategory);
+            if (isSuccess)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete("{id::guid}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            bool isSuccess = await _categoriesRepository.Delete(id);
+            if (isSuccess)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

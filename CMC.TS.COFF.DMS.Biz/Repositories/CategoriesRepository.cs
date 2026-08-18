@@ -7,6 +7,7 @@ using System.Text;
 using CMC.TS.COFF.DMS.Data.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace CMC.TS.COFF.DMS.Biz.Repositories
 {
@@ -40,7 +41,7 @@ namespace CMC.TS.COFF.DMS.Biz.Repositories
             try
             {
                 _logger.LogInformation($"start fetching categories operation");
-                return await _context.categories.Where(a => true).ToListAsync();
+                return await _context.categories.Where(a => a.IsDeleted == false).ToListAsync();
             }
             catch (Exception e)
             {
@@ -54,13 +55,58 @@ namespace CMC.TS.COFF.DMS.Biz.Repositories
             try
             {
                 _logger.LogInformation($"start fetching category with id = {id}");
-                return await _context.categories.FirstOrDefaultAsync(a => a.Id == id);
+                return await _context.categories.FirstOrDefaultAsync(a => a.Id == id && a.IsDeleted == false);
             }
             catch (Exception e)
             {
-                _logger.LogError($"Get Category by Id failed", e);
+                _logger.LogError($"Get Category by Id failed {e.Message}");
                 return null;
             }
+        }
+
+        public async Task<bool> Update(Guid id, NewCategory news)
+        {
+            try
+            {
+                _logger.LogInformation($"starting update operation for category {id}");
+                Categories? targetCartegory = await GetCategoryById(id);
+                if (targetCartegory != null)
+                {
+                    targetCartegory.Name = news.Name;
+                    targetCartegory.Code = news.Code;
+                    targetCartegory.Description = news.Description;
+                    return await _context.SaveChangesAsync() > 0;
+                }
+                _logger.LogError($"can't find category in update operation");
+                return false;
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"Update operation failed {e.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> Delete(Guid id)
+        {
+            try
+            {
+                _logger.LogInformation("starting delete operation");
+                Categories? categories = await GetCategoryById(id);
+                if (categories != null)
+                {
+                    categories.IsDeleted = true;
+                    return await _context.SaveChangesAsync() > 0;
+                }
+                _logger.LogError($"can't find category {id}");
+                return false;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"delete operation failed {e.Message}");
+                return false;
+            }
+            
         }
     }
 }
